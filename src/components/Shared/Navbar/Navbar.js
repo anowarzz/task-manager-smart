@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import navLogo from "../../../assets/planning.png";
 import './Navbar.css'
 
@@ -9,20 +9,21 @@ const Navbar = () => {
 
   return (
     <div class="bg-gray-900">
-      <div class="px-4 py-5 mx-auto sm:max-w-2xl md:max-w-full lg:max-w-screen-xl md:px-6">
+      <div class="px-4 py-5 mx-auto sm:max-w-2xl md:max-w-full lg:max-w-screen-2xl md:px-6">
         <div class="relative flex items-center justify-between ">
-          <NavLink
+          <Link
             to="/"
             aria-label="Smart Task Manager"
-            title="Smart Task Manager"
-            class="inline-flex flex-row  items-center justify-between gap-x-2"
+            title="Manage Your Tasks Smartly"
+            class="inline-flex flex-row  items-center flex-nowrap gap-x-1"
+            
           >
-              <img src={navLogo} id="logo" className="w-16 p-2" alt="" />
-            <span class="ml-1 sm:text-xl font-bold tracking-wide text-white uppercase font-Poppins">
-              Smart Task Manager
-            </span>
-          </NavLink>
-          <ul class="items-center hidden space-x-8 lg:flex">
+              <img src={navLogo}  className="w-16 h-16 p-2" alt="" />
+            <p class="sm:text-xl font-bold tracking-wide text-sky-500 uppercase font-Poppins">
+      <span className="text-myPink">Smart</span> Task Manager
+            </p>
+          </Link>
+          <ul class="items-center hidden space-x-6 lg:space-x-8 md:flex">
             <li>
               <NavLink
                 to="/addTask"
@@ -64,7 +65,7 @@ const Navbar = () => {
               </NavLink>
             </li>
           </ul>
-          <div class="lg:hidden">
+          <div class="md:hidden">
             <button
               aria-label="Open Menu"
               title="Open Menu"
@@ -97,9 +98,9 @@ const Navbar = () => {
                         title="Company"
                         class="inline-flex items-center"
                       >
-                        <img src={navLogo} className="w-16 pr-4" alt="" />
-                        <span class="ml-2 text-xl font-bold tracking-wide text-white uppercase">
-                          Task Manager
+                        <img src={navLogo} className="w-16 p-1 mb-2" alt="" />
+                        <span class="text-xl font-bold tracking-wide text-myPink uppercase">
+                          Task <span className="text-blue-500">Manager</span>
                         </span>
                       </NavLink>
                     </div>

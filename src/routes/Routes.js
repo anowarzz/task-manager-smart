@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import AddTask from "../components/Pages/AddTask/AddTask";
 import CompletedTask from "../components/Pages/CompletedTask/CompletedTask";
+import ErrorPage from "../components/Pages/ErrorPage/ErrorPage";
 import Login from "../components/Pages/Login/Login";
 import MyTasks from "../components/Pages/MyTasks/MyTasks";
 import SignUp from "../components/Pages/SignUp/SignUp";
@@ -11,6 +12,7 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <Main />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: '/addTask',
