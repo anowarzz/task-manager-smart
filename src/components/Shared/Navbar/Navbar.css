@@ -1,6 +1,6 @@
 /* Apply animation to navbar logo  */
 #logo {
-  animation: spin 15s normal infinite;
+  animation: spin 18s normal infinite;
 }
 
 @keyframes spin {

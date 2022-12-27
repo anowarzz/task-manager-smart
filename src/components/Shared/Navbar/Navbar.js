@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import navLogo from "../../../assets/planning.png";
 import './Navbar.css'
 
@@ -9,51 +9,59 @@ const Navbar = () => {
 
   return (
     <div class="bg-gray-900">
-      <div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-6">
+      <div class="px-4 py-5 mx-auto sm:max-w-2xl md:max-w-full lg:max-w-screen-xl md:px-6">
         <div class="relative flex items-center justify-between ">
-          <Link
+          <NavLink
             to="/"
             aria-label="Smart Task Manager"
             title="Smart Task Manager"
-            class="inline-flex items-center"
+            class="inline-flex flex-row  items-center justify-between gap-x-2"
           >
-            <img src={navLogo} id="logo" className="animate-spin w-16 pr-4" alt="" />
+              <img src={navLogo} id="logo" className="w-16 p-2" alt="" />
             <span class="ml-1 sm:text-xl font-bold tracking-wide text-white uppercase font-Poppins">
               Smart Task Manager
             </span>
-          </Link>
+          </NavLink>
           <ul class="items-center hidden space-x-8 lg:flex">
             <li>
-              <Link
+              <NavLink
                 to="/addTask"
-                class="font-medium tracking-wide text-white  transition-colors duration-200 hover:text-sky-400 border-b-transparent ease-linear transform border-b-2 hover:border-pink-600"
+                className={({ isActive }) =>
+                isActive ? "font-medium tracking-wide transition-colors duration-200 text-sky-400  border-b-transparent ease-linear transform border-b-2 hover:border-pink-600" : "font-medium tracking-wide text-white  transition-colors duration-200 hover:text-sky-400 border-b-transparent ease-linear transform border-b-2 hover:border-pink-600"
+              }
               >
                 Add Task
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
-                to="/myTask"
-                class="font-medium tracking-wide text-white  transition-colors duration-200 hover:text-sky-400 border-b-transparent ease-linear transform border-b-2 hover:border-pink-600"
+              <NavLink
+                to="/myTasks"
+                className={({ isActive }) =>
+                isActive ? "font-medium tracking-wide transition-colors duration-200 text-sky-400  border-b-transparent ease-linear transform border-b-2 hover:border-pink-600" : "font-medium tracking-wide text-white  transition-colors duration-200 hover:text-sky-400 border-b-transparent ease-linear transform border-b-2 hover:border-pink-600"
+              }
               >
                 My Tasks
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/completedTasks"
-                class="font-medium tracking-wide text-white  transition-colors duration-200 hover:text-sky-400 border-b-transparent ease-linear transform border-b-2 hover:border-pink-600"
+                className={({ isActive }) =>
+                isActive ? "font-medium tracking-wide transition-colors duration-200 text-sky-400  border-b-transparent ease-linear transform border-b-2 hover:border-pink-600" : "font-medium tracking-wide text-white  transition-colors duration-200 hover:text-sky-400 border-b-transparent ease-linear transform border-b-2 hover:border-pink-600"
+              }
               >
                 Completed Tasks
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/login"
-                class="font-medium tracking-wide text-white  transition-colors duration-200 hover:text-sky-400 border-b-transparent ease-linear transform border-b-2 hover:border-pink-600"
+                className={({ isActive }) =>
+                isActive ? "font-medium tracking-wide transition-colors duration-200 text-sky-400  border-b-transparent ease-linear transform border-b-2 hover:border-pink-600" : "font-medium tracking-wide text-white  transition-colors duration-200 hover:text-sky-400 border-b-transparent ease-linear transform border-b-2 hover:border-pink-600"
+              }
               >
                 Login
-              </Link>
+              </NavLink>
             </li>
           </ul>
           <div class="lg:hidden">
@@ -83,7 +91,7 @@ const Navbar = () => {
                 <div class="p-5 bg-gray-800 border rounded shadow-sm">
                   <div class="flex items-center justify-between mb-4 text-white">
                     <div>
-                      <Link
+                      <NavLink
                         to="/"
                         aria-label="Company"
                         title="Company"
@@ -93,7 +101,7 @@ const Navbar = () => {
                         <span class="ml-2 text-xl font-bold tracking-wide text-white uppercase">
                           Task Manager
                         </span>
-                      </Link>
+                      </NavLink>
                     </div>
                     <div>
                       <button
@@ -114,40 +122,49 @@ const Navbar = () => {
                   <nav>
                     <ul class="space-y-4">
                       <li>
-                        <Link
+                        <NavLink
                           onClick={() => setIsMenuOpen(false)}
                           to="/addTask"
-                          class="font-medium tracking-wide transition-colors duration-200 hover:text-sky-400 text-white"
+                          className={({ isActive }) =>
+                isActive ? "font-medium tracking-wide transition-colors duration-200 text-sky-400  border-b-transparent ease-linear transform border-b-2 hover:border-pink-600" : "font-medium tracking-wide text-white  transition-colors duration-200 hover:text-sky-400 border-b-transparent ease-linear transform border-b-2 hover:border-pink-600"
+              }
                         >
                           Add Task
-                        </Link>
+                        </NavLink>
                       </li>
                       <li>
-                        <Link
+                        <NavLink
                           onClick={() => setIsMenuOpen(false)}
                           to="/myTasks"
-                          class="font-medium tracking-wide  transition-colors duration-200 hover:text-sky-400 text-white"
+                          className={({ isActive }) =>
+                isActive ? "font-medium tracking-wide transition-colors duration-200 text-sky-400  border-b-transparent ease-linear transform border-b-2 hover:border-pink-600" : "font-medium tracking-wide text-white  transition-colors duration-200 hover:text-sky-400 border-b-transparent ease-linear transform border-b-2 hover:border-pink-600"
+              }
                         >
                           My Tasks
-                        </Link>
+                        </NavLink>
                       </li>
                       <li>
-                        <Link
+                        <NavLink
                           onClick={() => setIsMenuOpen(false)}
                           to="/completedTasks"
-                          class="font-medium tracking-wide text-white transition-colors duration-200 hover:text-sky-400"
+                          className={({ isActive }) =>
+                isActive ? "font-medium tracking-wide transition-colors duration-200 text-sky-400  border-b-transparent ease-linear transform border-b-2 hover:border-pink-600" : "font-medium tracking-wide text-white  transition-colors duration-200 hover:text-sky-400 border-b-transparent ease-linear transform border-b-2 hover:border-pink-600"
+              }
                         >
                           Completed Tasks
-                        </Link>
+                        </NavLink>
                       </li>
                       <li>
-                        <Link
+                        <NavLink
                           onClick={() => setIsMenuOpen(false)}
                           to="/login"
-                          class="font-medium tracking-wide text-white transition-colors duration-200 hover:text-sky-400"
+                      
+                          className={({ isActive }) =>
+                isActive ? "font-medium tracking-wide transition-colors duration-200 text-sky-400  border-b-transparent ease-linear transform border-b-2 hover:border-pink-600" : "font-medium tracking-wide text-white  transition-colors duration-200 hover:text-sky-400 border-b-transparent ease-linear transform border-b-2 hover:border-pink-600"
+              }
                         >
                           Login
-                        </Link>
+                        </NavLink>
                       </li>
                     </ul>
                   </nav>
