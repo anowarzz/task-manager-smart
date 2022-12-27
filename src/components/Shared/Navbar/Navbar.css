@@ -1,0 +1,14 @@
+/* Apply animation to navbar logo  */
+#logo {
+  animation: spin 15s normal infinite;
+}
+
+@keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(36deg);
+    }
+  }
+  
