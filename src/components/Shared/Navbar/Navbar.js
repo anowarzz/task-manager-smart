@@ -33,7 +33,7 @@ const Navbar = () => {
           >
               <img src={navLogo}  className="w-16 h-16 p-2" alt="" />
             <p className="sm:text-xl font-bold lg:tracking-wide text-sky-500 uppercase pr-1">
-      <span className="text-myPink">Smart</span> Task Manager
+      <span className="text-myPink pr-1">Task</span>  Manager
             </p>
           </Link>
           <ul className="items-center hidden space-x-6 lg:space-x-8 md:flex">

@@ -14,7 +14,7 @@ const SignUp = () => {
 
   // context and states 
 const {createUser,updateUserProfile,
-googleLogIn,setUser,loading,setLoading,} = useContext(AuthContext);
+googleLogin,setUser,loading,setLoading,} = useContext(AuthContext);
 
 
 // Error State
@@ -56,7 +56,17 @@ const handleCreateUser = (event) => {
       console.log(user);
       setError("");
       setLoading(false);
-      toast.success("Registration Successful");
+      toast.success("Sign Up Successful", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      
       handleUpdateUserProfile(name);
       navigate(from, { replace: true });
     });
@@ -66,14 +76,18 @@ const handleCreateUser = (event) => {
 
       updateUserProfile(profile)
         .then(() => {})
-        .catch((e) => console.error(e));
+        .catch((e) => {console.error(e)
+            setLoading(false);
+        }
+        );
     };
   };
 
 
   // Login With google
   const handleGoogleLogin = () => {
-    googleLogIn(googleProvider)
+    setLoading(true)
+    googleLogin(googleProvider)
       .then((result) => {
         const user = result.user;
         setUser(user);
@@ -96,6 +110,7 @@ const handleCreateUser = (event) => {
       .catch((err) => {
         console.error(err);
         setError(err.message);
+        setLoading(false);
       });
   };
 
@@ -138,6 +153,7 @@ const handleCreateUser = (event) => {
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 
                  border-blue-300
                 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                required
               />
             </div>
 
@@ -155,6 +171,7 @@ const handleCreateUser = (event) => {
                 type="password"
                 name="password"
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border-blue-300 border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                required
               />
             </div>
   
@@ -173,6 +190,7 @@ const handleCreateUser = (event) => {
                 type="password"
                 name="confirmPass"
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border-blue-300 border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                required
               />
             </div>
 
@@ -197,7 +215,7 @@ const handleCreateUser = (event) => {
             <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/5"></span>
           </div>
   
-          <div className="flex items-center mt-6 -mx-2">
+          <Link className="flex items-center mt-6 -mx-2">
             <button
             onClick={handleGoogleLogin}
               type="button"
@@ -209,7 +227,7 @@ const handleCreateUser = (event) => {
   
               <span className="inline">Google</span>
             </button>
-          </div>
+          </Link>
   
           <p className="mt-6  text-sm font-light text-center text-gray-700 ">
             {" "}
