@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import AuthProvider from './contexts/AuthProvider';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import swal from 'sweetalert';
 
 
 
