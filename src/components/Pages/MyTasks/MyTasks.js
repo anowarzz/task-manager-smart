@@ -48,7 +48,6 @@ console.log(myTasks);
     </div>
 
 
-
         </div>
     );
 };
