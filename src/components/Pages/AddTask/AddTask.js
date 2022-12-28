@@ -55,6 +55,7 @@ const AddTask = () => {
                 description,
                 image: imageLink,
                 taskCreatedTime,
+                userEmail: user?.email
               };
           
 

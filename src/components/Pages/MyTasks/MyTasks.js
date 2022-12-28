@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import MyTaskCard from './MyTaskCard';
 
 const MyTasks = () => {
 
@@ -22,10 +23,18 @@ console.log(myTasks);
 
 
     return (
-        <div className='h-screen'>
+        <div className='mx-auto'>
             <h2 className='text-2xl md:text-3xl lg:text-4xl text-white text-center mt-10'>Your All Task List</h2>
+
+    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 w-11/12 mx-auto gap-6'>
+        {
+            myTasks.map(task => <MyTaskCard key={task._id} task = {task} />)
+        }
+    </div>
         </div>
     );
 };
 
 export default MyTasks;
+
+
