@@ -19,7 +19,7 @@ const Navbar = () => {
             
           >
               <img src={navLogo}  className="w-16 h-16 p-2" alt="" />
-            <p class="sm:text-xl font-bold tracking-wide text-sky-500 uppercase font-Poppins">
+            <p class="sm:text-xl font-bold lg:tracking-wide text-sky-500 uppercase pr-1">
       <span className="text-myPink">Smart</span> Task Manager
             </p>
           </Link>
