@@ -1,16 +1,11 @@
 
-import React, { useState } from 'react';
-
+import React from 'react';
 
 const CompletedTask = () => {
-
-
-
-
     return (
-      <div>
-
-      </div>
+        <div>
+            <h3>completed</h3>
+        </div>
     );
 };
 

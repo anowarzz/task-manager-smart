@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import photo from '../../../assets/planning.png'
 
 
-const MyTaskCard = ({ task }) => {
+const MyTaskCard = ({ task, handleDeletedTask }) => {
 
     const [showModal, setShowModal] = useState(false)
+
+
 
   return (
 <div className="max-w-lg shadow-2xl h-96 bg-gray-100 border-gray-700 rounded-md relative">
@@ -24,23 +26,31 @@ const MyTaskCard = ({ task }) => {
     }
         </p>
 
-        <div className="flex gap-x-4 items-center justify-center  mt-3 absolute bottom-4 left-1/4">
-    <Button gradientDuoTone="greenToBlue" size="xs" onClick={() => setShowModal(!showModal)}>
+        <div className="flex gap-x-4 items-center justify-center  mt-3 absolute bottom-4 left-[20%] md:left-[15%]">
+    <Button color="warning" size="xs" onClick={() => setShowModal(!showModal)} id="details">
           Details
         </Button>
-        <Button  gradientDuoTone="pinkToOrange" size="xs">
-      Mark As Completed
+        <Button  gradientMonochrome="success" size="xs">
+            Completed
+    </Button>
+    <Button 
+onClick={() => handleDeletedTask(task)} color="failure" size="xs">
+      Delete
     </Button>
   
         </div>
     </div>
 
-{/* Modal */}
+
+
+{/* Modal of task details */}
 <React.Fragment>
        
         <Modal
           show={showModal}
           onClose={() => setShowModal(!showModal)}
+          data-modal-toggle="details"
+          tabIndex="2"
         >
           <Modal.Header>
             Terms of Service
@@ -68,6 +78,8 @@ const MyTaskCard = ({ task }) => {
           </Modal.Footer>
         </Modal>
       </React.Fragment>
+
+
 
 
 </div>

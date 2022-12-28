@@ -3,6 +3,7 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 import MyTaskCard from './MyTaskCard';
 import { SyncLoader} from "react-spinners";
 import TaskModal from './TaskModal';
+import swal from 'sweetalert';
 
 
 
@@ -28,7 +29,31 @@ useEffect(  () => {
     )
 },[user?.email, setLoading])
 
-console.log(myTasks);
+
+// Deleting a task
+
+const handleDeletedTask = (task) => {
+
+const id = task._id;
+
+fetch(`http://localhost:5000/tasks/${id}`, {
+    method: "DELETE"
+})
+.then(res=> res.json())
+.then(data => {
+    console.log(data);
+if(data.deletedCount > 0){
+
+// const remainingTask = myTasks.filter(task => task._id !== id)
+    swal({
+        title: "Yaa !",
+        text: "Task Deleted Successfully",
+        icon: "success",
+        button: "Done",
+      });
+}    
+})
+}
 
 
     return (
@@ -43,7 +68,8 @@ console.log(myTasks);
 
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 w-11/12 mx-auto gap-6'>
         {
-            myTasks.map(task => <MyTaskCard key={task._id} task = {task} />)
+            myTasks.map(task => <MyTaskCard key={task._id} task = {task}
+                handleDeletedTask = {handleDeletedTask} />)
         }
     </div>
 
