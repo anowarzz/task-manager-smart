@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import swal from "sweetalert";
 import { AuthContext } from "../../../contexts/AuthProvider";
-import { BeatLoader } from "react-spinners";
+import { SyncLoader} from "react-spinners";
 import { format, getHours } from "date-fns";
 
 const AddTask = () => {
@@ -36,7 +36,7 @@ const AddTask = () => {
 
 
     // posting image to imgbb
-    const url = `https://api.imgbb.com/1/upload?expiration=600&key=d502572cf6e16623a00caedf7003d62d`;
+    const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
 
     if (inputImage) {
       fetch(url, {
@@ -96,7 +96,7 @@ const AddTask = () => {
     <div className="">
       {loading && (
         <div className="z-20 absolute top-[50%] left-[50%] ">
-          <BeatLoader size="20" color="blue" className="text-center" />
+          <SyncLoader size="20" color="red" className="text-center" />
         </div>
       )}
       {user?.uid && (
