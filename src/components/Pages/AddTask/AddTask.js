@@ -2,24 +2,33 @@ import React, { useContext, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import swal from 'sweetalert';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import { BeatLoader} from "react-spinners";
+import { format } from 'date-fns';
+
 
 const AddTask = () => {
 
-const {user, loading, setLoading} = useContext(AuthContext)
+const {user} = useContext(AuthContext)
 const imageHostKey = process.env.REACT_APP_imgbb_key;
 
 // States
-const [image, setImage] = useState(null)
+const [inputImage, setInputImage] = useState(null)
+const [imageLink, setImageLink] = useState("")
+const [loading, setLoading] = useState(false)
 
-
+// getting image data from input field
 const handleImage = (e) => {
     const image = e.target.files[0];
-    setImage(image)
+    setInputImage(image)
 }
 
+const taskCreatedTime =   format(new Date() , 'PP')
+console.log(taskCreatedTime);
 
 
 
+
+// function for adding  task to database
 const handleAddTask = (event) => {
     event.preventDefault();
     setLoading(true)
@@ -29,36 +38,77 @@ const handleAddTask = (event) => {
     const description = form.description.value;
     const formData = new FormData();
 
-    formData.append("image", image);
+    formData.append("image", inputImage);
 
+    // posting image to imgbb
     const url = `https://api.imgbb.com/1/upload?expiration=600&key=d502572cf6e16623a00caedf7003d62d`;
  
- if(image){
+ if(inputImage){
     fetch(url, {
         method: "POST",
         body: formData,
       })
       .then((res) => res.json())
       .then((imgData) => {
-          console.log(imgData);
           if(imgData.success){
               console.log(imgData?.data?.url);
-              swal({
-                  title: "Well Done !",
-                  text: "Task Added Successfully",
-                  icon: "success",
-                  button: "Go Back",
-                });
-                form.reset();
+            const imageLink = imgData?.data?.url;
+            setImageLink(imageLink);
+
+                
           }
       })
+      const task = {
+        title, description, image : imageLink, taskCreatedTime
+    }
+    
+    // Posting tasks to database
+     fetch( `http://localhost:5000/tasks`,{
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(task)
+     } )
+     .then(res => res.json())
+     .then(data => {
+        if(data.acknowledged){
+            setLoading(false)
+            swal({
+                title: "Well Done !",
+                text: "Task Added Successfully",
+                icon: "success",
+                button: "Go Back",
+              });
+            form.reset();
+        }
+     })
+     .catch(err => {
+        console.error(err)
+        setLoading(false)
+        
+     })
+
+
+
  }
+
+
+
+
+
+
 
 }
 
     return (
         <div className=''>
 
+{loading && (
+        <div className="z-20 absolute top-[50%] left-[50%] ">
+          <BeatLoader size="20" color="blue" className="text-center" />
+        </div>
+      )}
             <p className='mt-6 text-center text-white text-lg'> Welcome, <span className='text-blue-400 ml-2 text-lg'>{user?.displayName}</span></p>
 
             <h2 className='text-2xl md:text-3xl lg:text-4xl text-center mt-12 text-myYellow font-bold'>Add Your Task</h2>
