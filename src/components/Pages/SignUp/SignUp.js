@@ -1,7 +1,106 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { GoogleAuthProvider } from 'firebase/auth';
+import React, { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { AuthContext } from '../../../contexts/AuthProvider';
+
+
+const googleProvider = new GoogleAuthProvider();
+
+
 
 const SignUp = () => {
+
+
+  // context and states 
+const {createUser,updateUserProfile,
+googleLogIn,setUser,loading,setLoading,} = useContext(AuthContext);
+
+
+// Error State
+const [error, setError] = useState("");
+
+ // location
+const navigate = useNavigate();
+const location = useLocation();
+const from = location.state?.from?.pathname || "/";
+
+
+const handleCreateUser = (event) => {
+
+    event.preventDefault();
+    setLoading(true);
+    const form = event.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirm = form.confirmPass.value;
+
+    if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      setError("Please Provide a Valid Email");
+    }
+
+    if (password.length < 6) {
+      setError("Password Must Be 6 Character or More");
+      return;
+    }
+
+    if (confirm !== password) {
+      setError("Your Password Did Not Match");
+      return;
+    }
+
+    createUser(email, password)
+    .then((result) => {
+      const user = result.user;
+      console.log(user);
+      setError("");
+      setLoading(false);
+      toast.success("Registration Successful");
+      handleUpdateUserProfile(name);
+      navigate(from, { replace: true });
+    });
+
+    const handleUpdateUserProfile = (name) => {
+      const profile = {displayName: name};
+
+      updateUserProfile(profile)
+        .then(() => {})
+        .catch((e) => console.error(e));
+    };
+  };
+
+
+  // Login With google
+  const handleGoogleLogin = () => {
+    googleLogIn(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        console.log(user);
+
+        setError("");
+        setLoading(false);
+        navigate(from, { replace: true });
+        toast.success("Login Successful", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        setError(err.message);
+      });
+  };
+
+
+
     return (
         <div className="mt-12 w-11/12 mx-auto">
         <div className="w-full max-w-md p-6  mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -9,17 +108,17 @@ const SignUp = () => {
             Sign Up
           </h1>
   
-          <form className="mt-6">
+          <form className="mt-6" onSubmit={handleCreateUser} >
             <div>
               <label
-                for="email"
+                htmlFor="name"
                 className="block text-sm text-gray-800 dark:text-gray-200"
               >
                 Name
               </label>
               <input
-              name="email"
-                type="email"
+              name="name"
+                type="text"
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 
                  border-blue-300
                 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
@@ -28,7 +127,7 @@ const SignUp = () => {
 
             <div className='mt-4'>
               <label
-                for="email"
+                htmlFor="email"
                 className="block text-sm text-gray-800 dark:text-gray-200"
               >
                 Email
@@ -45,7 +144,7 @@ const SignUp = () => {
             <div className="mt-4">
               <div className="flex items-center justify-between">
                 <label
-                  for="password"
+                  htmlFor="password"
                   className="block text-sm text-gray-800 dark:text-gray-200"
                 >
                   Password
@@ -62,7 +161,7 @@ const SignUp = () => {
             <div className="mt-4">
               <div className="flex items-center justify-between">
                 <label
-                  for="confirmPass"
+                  htmlFor="confirmPass"
                   className="block text-sm text-gray-800 dark:text-gray-200"
                 >
                   Confirm Password
@@ -77,9 +176,11 @@ const SignUp = () => {
               />
             </div>
 
-       
+            {error && (
+                <p className="text-red-500  text-sm font-bold text-center my-3">{error}</p>
+              )}
   
-            <div className="mt-6">
+            <div className="mt-4">
               <button className="w-full px-6 py-2.5 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-900 rounded-lg hover:bg-purple-800 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
                 Sign In
               </button>
@@ -98,6 +199,7 @@ const SignUp = () => {
   
           <div className="flex items-center mt-6 -mx-2">
             <button
+            onClick={handleGoogleLogin}
               type="button"
               className="flex items-center justify-center w-full px-6 py-2 mx-2 text-sm font-medium text-white transition-colors duration-300 transform bg-blue-800 rounded-lg hover:bg-purple-800  focus:outline-none"
             >

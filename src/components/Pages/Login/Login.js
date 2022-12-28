@@ -93,7 +93,7 @@ const Login = () => {
         <form className="mt-6">
           <div>
             <label
-              for="email"
+              htmlFor="email"
               className="block text-sm text-gray-800 dark:text-gray-200"
             >
               Email
@@ -110,7 +110,7 @@ const Login = () => {
           <div className="mt-4">
             <div className="flex items-center justify-between">
               <label
-                for="password"
+                htmlFor="password"
                 className="block text-sm text-gray-800 dark:text-gray-200"
               >
                 Password
@@ -127,6 +127,10 @@ const Login = () => {
             />
           </div>
 
+          {error && (
+              <p className="text-red-500 font-bold text-center mb-3">{error}</p>
+            )}
+
           <div className="mt-6">
             <button className="w-full px-6 py-2.5 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-900 rounded-lg hover:bg-purple-800 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
               Sign In
@@ -137,16 +141,16 @@ const Login = () => {
         <div className="flex items-center justify-between mt-4">
           <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
 
-          <button className="text-xs text-center text-gray-900 uppercase dark:text-gray-400">
+          <span className="text-xs text-center text-gray-900 uppercase dark:text-gray-400">
             or Login with Social Media
-          </button>
+          </span>
 
           <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/5"></span>
         </div>
 
         <div className="flex items-center mt-6 -mx-2">
           <button
-            type="button"
+          onClick={handleGoogleLogin}
             className="flex items-center justify-center w-full px-6 py-2 mx-2 text-sm font-medium text-white transition-colors duration-300 transform bg-blue-800 rounded-lg hover:bg-purple-800  focus:outline-none"
           >
             <svg className="w-4 h-4 mx-2 fill-current" viewBox="0 0 24 24">

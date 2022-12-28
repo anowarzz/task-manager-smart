@@ -1,11 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import navLogo from "../../../assets/planning.png";
+import { AuthContext } from "../../../contexts/AuthProvider";
 import './Navbar.css'
 
 
 const Navbar = () => {
+
+  // Navbar responsive state
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // context value
+  const { user, logOut } = useContext(AuthContext);
+
+  const logOutHandler = () => {
+    logOut()
+    .then(() => {})
+    .catch((err) => console.error(err))
+  };
+
 
   return (
     <div className="bg-gray-900">
@@ -54,17 +67,36 @@ const Navbar = () => {
                 Completed Tasks
               </NavLink>
             </li>
-            <li>
+
+{
+  user?.uid ?
+  <li>
               <NavLink
                 to="/login"
                 className={({ isActive }) =>
                 isActive ? "font-medium tracking-wide transition-colors duration-200 text-sky-400  border-b-transparent ease-linear transform border-b-2 hover:border-pink-600" : "font-medium tracking-wide text-white  transition-colors duration-200 hover:text-sky-400 border-b-transparent ease-linear transform border-b-2 hover:border-pink-600"
               }
               >
-                Login
+                Log Out
               </NavLink>
             </li>
+            :
+
+
+            <li>
+            <button className="font-medium tracking-wide transition-colors duration-200 text-sky-400  border-b-transparent ease-linear transform bg-pink-600">
+              Log In
+            </button>
+          </li>
+
+
+}
+          
+
+           
+
           </ul>
+
           <div className="md:hidden">
             <button
               aria-label="Open Menu"
