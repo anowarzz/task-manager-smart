@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import swal from 'sweetalert';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import { BeatLoader} from "react-spinners";
-import { format } from 'date-fns';
+import { format, getHours } from 'date-fns';
 
 
 const AddTask = () => {
@@ -24,6 +24,7 @@ const handleImage = (e) => {
 
 const taskCreatedTime =   format(new Date() , 'PP')
 console.log(taskCreatedTime);
+
 
 
 
@@ -59,7 +60,7 @@ const handleAddTask = (event) => {
           }
       })
       const task = {
-        title, description, image : imageLink, taskCreatedTime
+        title, description, image : imageLink, taskCreatedTime,
     }
     
     // Posting tasks to database
@@ -109,7 +110,9 @@ const handleAddTask = (event) => {
           <BeatLoader size="20" color="blue" className="text-center" />
         </div>
       )}
-            <p className='mt-6 text-center text-white text-lg'> Welcome, <span className='text-blue-400 ml-2 text-lg'>{user?.displayName}</span></p>
+           {
+            user?.uid &&  <p className='mt-6 text-center text-white text-lg'> Welcome, <span className='text-blue-400 ml-2 text-lg'>{user?.displayName}</span></p>
+           }
 
             <h2 className='text-2xl md:text-3xl lg:text-4xl text-center mt-12 text-myYellow font-bold'>Add Your Task</h2>
 
@@ -127,7 +130,8 @@ const handleAddTask = (event) => {
                 required
               />
 
-                <p className='mb-4 text-gray-50'>Add Image</p>
+                {/* <p className='mb-4 text-gray-50'>Add Image</p> */}
+                <label htmlFor="image" className='text-white p-3'>Upload Image</label>
               <input
               onChange={handleImage}
                 type="file"
@@ -146,10 +150,20 @@ const handleAddTask = (event) => {
                 required
               ></textarea>
 
-              <input
-                type="submit"
-                className="btn bg-pink-800 text-gray-100 font-bold w-4/5 lg:w-2/4 mt-8 mx-auto hover:bg-red-500 border-none py-2 rounded"
-              />
+           {
+            user?.uid  ?
+            <input
+            type="submit"
+            value="Add Task"
+            className="btn bg-pink-800 text-gray-100 font-bold w-4/5 lg:w-2/4 mt-8 mx-auto hover:bg-red-500 border-none py-2 rounded"
+          />:
+          <input
+          type="submit"
+          value="Please Login First To Add Tasks"
+          disabled = {!user?.uid}
+          className="btn bg-pink-800 text-gray-400 font-bold w-4/5 lg:w-2/4 mt-8 mx-auto border-none py-2 rounded"
+        />
+           }
             </div>
           </form>
      

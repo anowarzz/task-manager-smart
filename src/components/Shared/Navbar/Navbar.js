@@ -129,7 +129,7 @@ const Navbar = () => {
                         className="inline-flex items-center"
                       >
                         <img src={navLogo} className="w-16 p-1 mb-2" alt="" />
-                        <span className="text-xl font-bold tracking-wide text-myPink uppercase">
+                        <span className="text-xl font-bold tracking-wide text-myPink uppercase pl-2">
                           Task <span className="text-blue-500">Manager</span>
                         </span>
                       </NavLink>
