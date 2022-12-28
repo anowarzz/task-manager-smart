@@ -71,30 +71,28 @@ const Navbar = () => {
 {
   user?.uid ?
   <li>
-              <NavLink
-                to="/login"
-                className={({ isActive }) =>
-                isActive ? "font-medium tracking-wide transition-colors duration-200 text-sky-400  border-b-transparent ease-linear transform border-b-2 hover:border-pink-600" : "font-medium tracking-wide text-white  transition-colors duration-200 hover:text-sky-400 border-b-transparent ease-linear transform border-b-2 hover:border-pink-600"
-              }
-              >
+              <button 
+              onClick={logOutHandler}
+              className="font-medium tracking-wide transition-colors duration-200 text-white   ease-linear transform py-1 px-2 rounded-md bg-pink-800 hover:bg-red-500" >
                 Log Out
-              </NavLink>
+              </button>
             </li>
             :
 
-
             <li>
-            <button className="font-medium tracking-wide transition-colors duration-200 text-sky-400  border-b-transparent ease-linear transform bg-pink-600">
-              Log In
-            </button>
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+              isActive ? "font-medium tracking-wide transition-colors duration-200 text-sky-400  border-b-transparent ease-linear transform border-b-2 hover:border-pink-600" : "font-medium tracking-wide text-white  transition-colors duration-200 hover:text-sky-400 border-b-transparent ease-linear transform border-b-2 hover:border-pink-600"
+            }
+            >
+              Login
+            </NavLink>
           </li>
-
+       
 
 }
           
-
-           
-
           </ul>
 
           <div className="md:hidden">
@@ -187,18 +185,31 @@ const Navbar = () => {
                           Completed Tasks
                         </NavLink>
                       </li>
-                      <li>
-                        <NavLink
-                          onClick={() => setIsMenuOpen(false)}
-                          to="/login"
-                      
-                          className={({ isActive }) =>
-                isActive ? "font-medium tracking-wide transition-colors duration-200 text-sky-400  border-b-transparent ease-linear transform border-b-2 hover:border-pink-600" : "font-medium tracking-wide text-white  transition-colors duration-200 hover:text-sky-400 border-b-transparent ease-linear transform border-b-2 hover:border-pink-600"
-              }
-                        >
-                          Login
-                        </NavLink>
-                      </li>
+                   
+{
+  user?.uid ?
+  <li>
+              <button 
+              onClick={logOutHandler}
+              className="font-medium tracking-wide transition-colors duration-200 text-white   ease-linear transform py-1 px-2 rounded-md bg-pink-800 hover:bg-red-500" >
+                Log Out
+              </button>
+            </li>
+            :
+
+            <li>
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+              isActive ? "font-medium tracking-wide transition-colors duration-200 text-sky-400  border-b-transparent ease-linear transform border-b-2 hover:border-pink-600" : "font-medium tracking-wide text-white  transition-colors duration-200 hover:text-sky-400 border-b-transparent ease-linear transform border-b-2 hover:border-pink-600"
+            }
+            >
+              Login
+            </NavLink>
+          </li>
+       
+
+}
                     </ul>
                   </nav>
                 </div>

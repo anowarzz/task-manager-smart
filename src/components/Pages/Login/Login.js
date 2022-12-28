@@ -9,7 +9,7 @@ const googleProvider = new GoogleAuthProvider();
 
 const Login = () => {
   // Context
-  const { setUser, logIn, googleLogIn, loading, setLoading } =
+  const { setUser, logIn, googleLogin, loading, setLoading } =
     useContext(AuthContext);
 
   // Error State
@@ -27,6 +27,9 @@ const Login = () => {
     setLoading(true);
     const form = event.target;
     const email = form.email.value;
+    console.log(email);
+    console.log("hllo");
+    
     const password = form.password.value;
 
     logIn(email, password)
@@ -56,7 +59,7 @@ const Login = () => {
 
   // Login With google
   const handleGoogleLogin = () => {
-    googleLogIn(googleProvider)
+    googleLogin(googleProvider)
       .then((result) => {
         const user = result.user;
         setUser(user);
@@ -90,7 +93,7 @@ const Login = () => {
           Login
         </h1>
 
-        <form className="mt-6">
+        <form className="mt-6" onSubmit={handleLogIn}>
           <div>
             <label
               htmlFor="email"
@@ -99,11 +102,12 @@ const Login = () => {
               Email
             </label>
             <input
-            name="email"
+             name="email"
               type="email"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 
                border-blue-300
               dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              required
             />
           </div>
 
@@ -124,18 +128,22 @@ const Login = () => {
               type="password"
               name="password"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border-blue-300 border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              required
             />
           </div>
 
           {error && (
-              <p className="text-red-500 font-bold text-center mb-3">{error}</p>
-            )}
+                <p className="text-red-500  text-sm font-bold text-center my-3">{error}</p>
+              )}
+  
+   
+            <button 
 
-          <div className="mt-6">
-            <button className="w-full px-6 py-2.5 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-900 rounded-lg hover:bg-purple-800 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
+         type="submit"
+            className="mt-4 w-full px-6 py-2.5 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-900 rounded-lg hover:bg-purple-800 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
               Sign In
             </button>
-          </div>
+      
         </form>
 
         <div className="flex items-center justify-between mt-4">
@@ -148,7 +156,7 @@ const Login = () => {
           <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/5"></span>
         </div>
 
-        <div className="flex items-center mt-6 -mx-2">
+        <Link className="flex items-center mt-6 -mx-2">
           <button
           onClick={handleGoogleLogin}
             className="flex items-center justify-center w-full px-6 py-2 mx-2 text-sm font-medium text-white transition-colors duration-300 transform bg-blue-800 rounded-lg hover:bg-purple-800  focus:outline-none"
@@ -159,7 +167,7 @@ const Login = () => {
 
             <span className="inline">Google</span>
           </button>
-        </div>
+        </Link>
 
         <p className="mt-6  text-sm font-light text-center text-gray-700 ">
           {" "}

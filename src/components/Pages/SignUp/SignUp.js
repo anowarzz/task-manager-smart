@@ -82,7 +82,7 @@ const handleCreateUser = (event) => {
         setError("");
         setLoading(false);
         navigate(from, { replace: true });
-        toast.success("Login Successful", {
+        toast.success("Sign Up Successful", {
           position: "top-center",
           autoClose: 1000,
           hideProgressBar: true,
