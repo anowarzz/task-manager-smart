@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import swal from "sweetalert";
 import { AuthContext } from "../../../contexts/AuthProvider";
@@ -27,6 +27,7 @@ const AddTask = () => {
   const handleAddTask = (event) => {
     event.preventDefault();
     setLoading(true);
+
 
     const form = event.target;
     const title = form.title.value;
@@ -59,8 +60,6 @@ const AddTask = () => {
               };
           
 
-
-
             // Posting tasks to database
             fetch(`http://localhost:5000/tasks`, {
               method: "POST",
@@ -92,6 +91,12 @@ const AddTask = () => {
     }
   };
 
+
+
+  
+
+
+
   return (
     <div className="">
       {loading && (
@@ -114,7 +119,9 @@ const AddTask = () => {
       </h2>
 
       <div className="mt-12">
-        <form onSubmit={handleAddTask} className="w-full">
+        <form onSubmit={handleAddTask} 
+    
+        className="w-full" >
           <div className="flex flex-col justify-center items-center mx-auto">
             <p className="mb-4 text-gray-50">Task Title</p>
             <input
@@ -140,6 +147,7 @@ const AddTask = () => {
             />
             <p className="mt-8 text-gray-50">Task Description</p>
             <textarea
+          
               type="text"
               name="description"
               className="textarea  outline-fuchsia-600 w-4/5 lg:w-2/4 mx-auto mt-4 px-4  py-8 font-semibold text-center"

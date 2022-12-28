@@ -44,7 +44,8 @@ fetch(`http://localhost:5000/tasks/${id}`, {
     console.log(data);
 if(data.deletedCount > 0){
 
-// const remainingTask = myTasks.filter(task => task._id !== id)
+const remainingTask = myTasks.filter(task => task._id !== id)
+setMyTasks(remainingTask)
     swal({
         title: "Yaa !",
         text: "Task Deleted Successfully",
