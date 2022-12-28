@@ -88,6 +88,12 @@ const Login = () => {
 
   return (
     <div className="mt-12 w-11/12 mx-auto">
+
+{loading && (
+        <div className="z-20 absolute top-40 left-[50%] ">
+          <ScaleLoader color="blue" size={100} className="text-center" />
+        </div>
+      )}
       <div className="w-full max-w-md p-6  mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
         <h1 className="text-3xl font-semibold text-center text-gray-700 dark:text-white">
           Login
