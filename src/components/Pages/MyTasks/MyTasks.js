@@ -13,7 +13,6 @@ const MyTasks = () => {
 const {user} = useContext(AuthContext)
 
 const [loading, setLoading] = useState(false)
-
 const [myTasks, setMyTasks] = useState([])
 
 useEffect(  () => {
@@ -32,12 +31,11 @@ useEffect(  () => {
 
 
 // Deleting a task
-
 const handleDeletedTask = (task) => {
 
 const id = task._id;
 
-fetch(`http://localhost:5000/tasks/${id}`, {
+fetch(`http://localhost:5000/tasks/${task._id}`, {
     method: "DELETE"
 })
 .then(res=> res.json())
@@ -56,7 +54,6 @@ setMyTasks(remainingTask)
 }    
 })
 }
-
 
 
 
@@ -79,7 +76,9 @@ myTasks.length < 1 && <div className='mt-20 flex justify-center items-center'>
 
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 w-11/12 mx-auto gap-6'>
         {
-            myTasks.map(task => <MyTaskCard key={task._id} task = {task}
+            myTasks?.map(task => <MyTaskCard key={task._id} task = {task}
+                myTasks={myTasks}
+                setMyTasks = {setMyTasks}
                 handleDeletedTask = {handleDeletedTask} />)
         }
     </div>

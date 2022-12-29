@@ -1,10 +1,16 @@
 import { Button, Modal } from "flowbite-react";
 import React, { useState } from "react";
+import { useNavigation } from "react-router-dom";
+import swal from "sweetalert";
 import photo from "../../../assets/planning.png";
 
-const MyTaskCard = ({ task, handleDeletedTask }) => {
-  const [showModal, setShowModal] = useState(false);
-  const [editModeOn, setEditModeOn] = useState(false);
+const MyTaskCard = ({ task, handleDeletedTask, myTasks, setMyTasks}) => {
+
+    const [showModal, setShowModal] = useState(false);
+    const [editModeOn, setEditModeOn] = useState(false);
+    const from = '/myTasks'
+    
+const navigate = useNavigation();
 
   // edit mode on
   const handleEditTask = () => {
@@ -16,11 +22,41 @@ const MyTaskCard = ({ task, handleDeletedTask }) => {
     setEditModeOn(false);
   };
 
-  const handleSubmitEdit = (event) => {
+
+// Editing a task
+const handleSubmitEdit = (event) => {
     event.preventDefault();
     const form = event.target;
-    const editedTask = form.editTask.value;
-    console.log(editedTask);
+    const newTask = form.editTask.value;
+
+    const taskDescriptionNow = {
+        taskDescription : newTask
+    }
+
+    fetch(`http://localhost:5000/tasks/${task._id}`, {
+        method: 'PUT',
+        headers: {
+            'content-type' : 'application/json'
+        },
+        body: JSON.stringify(taskDescriptionNow)
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.modifiedCount > 0){
+            swal({
+                title: "Great",
+                text: "Task Edited Successfully",
+                icon: "success",
+                button: "Go Back",
+              });
+              setEditModeOn(false)
+              setShowModal(false)
+              const remaining = myTasks?.filter(tsk => tsk._id !== task._id )
+             
+              setMyTasks(remaining)
+              navigate(from, {replace :true})
+        }
+    })
   };
 
   return (
