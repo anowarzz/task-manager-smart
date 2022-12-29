@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle,} from '@fortawesome/free-solid-svg-icons'
 
 
-const MyTaskCard = ({ task, handleDeletedTask, refetch}) => {
+const MyTaskCard = ({ task, handleDeletedTask, refetch, handleMakeCompleted}) => {
 
     const [showModal, setShowModal] = useState(false);
     const [editModeOn, setEditModeOn] = useState(false);
@@ -57,6 +57,10 @@ const handleSubmitEdit = (event) => {
     })
   };
 
+
+
+
+
   return (
     <div className="max-w-lg shadow-2xl h-96 bg-gray-300 border-gray-700 rounded-md relative">
       <div>
@@ -86,11 +90,12 @@ const handleSubmitEdit = (event) => {
           >
             Details
           </Button>
-          <Button gradientMonochrome="success" size="sm">
+          <Button gradientMonochrome="success" size="sm"
+            onClick={() => handleMakeCompleted(task?._id)}>
             Completed <FontAwesomeIcon icon={faCheckCircle} className="pl-1" />
           </Button>
           <Button
-            onClick={() => handleDeletedTask(task)}
+            onClick={() => handleDeletedTask(task?._id)}
             color="failure"
             size="sm"
           >

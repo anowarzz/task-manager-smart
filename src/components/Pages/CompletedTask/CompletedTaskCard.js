@@ -1,10 +1,39 @@
-import { faCircleExclamation, faCross, faTrash, faTriangleExclamation, } from "@fortawesome/free-solid-svg-icons";
+import {  faTrash, faTriangleExclamation, } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "flowbite-react";
 import React from "react";
+import { toast } from "react-toastify";
 
 
-const CompletedTaskCard = ({ completeTask }) => {
+const CompletedTaskCard = ({ completeTask, refetch }) => {
+
+
+// Marking a task as completed
+const handleMakeNotCompleted = (id) => {
+
+    fetch(`http://localhost:5000/tasks/notDoneTasks/${id}`, {
+        method : "PUT"
+    })
+    .then(res => res.json())
+    .then( data => {
+        if(data.modifiedCount > 0){
+            toast.success("Task Marked As Not Completed", {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+              });
+              refetch();
+        }
+    })
+    }
+
+
+
   return (
     <div className="max-w-lg shadow-2xl h-96 bg-red-500 border-gray-700 rounded-md relative">
       <div>
@@ -27,7 +56,9 @@ const CompletedTaskCard = ({ completeTask }) => {
             <FontAwesomeIcon icon={faTrash} className="pl-2" />
     </Button>
 
-          <Button gradientMonochrome="lime">
+          <Button gradientMonochrome="lime"
+          onClick={() => handleMakeNotCompleted (completeTask?._id)}
+          >
             Not Completed
             <FontAwesomeIcon icon={faTriangleExclamation} className="pl-2" />
             </Button>

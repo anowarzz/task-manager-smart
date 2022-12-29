@@ -5,6 +5,7 @@ import { SyncLoader} from "react-spinners";
 import TaskModal from './TaskModal';
 import swal from 'sweetalert';
 import { useQuery } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 
 
@@ -30,7 +31,6 @@ const { isLoading, error, data:myTasks, refetch } = useQuery({
 const handleDeletedTask = (task) => {
 
 
-
 fetch(`http://localhost:5000/tasks/${task._id}`, {
     method: "DELETE"
 })
@@ -49,6 +49,32 @@ refetch()
 })
 }
 
+// Marking a task as completed
+const handleMakeCompleted = (id) => {
+
+fetch(`http://localhost:5000/tasks/doneTasks/${id}`, {
+    method : "PUT"
+})
+.then(res => res.json())
+.then( data => {
+    if(data.modifiedCount > 0){
+        toast.success("Task Marked As Completed", {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          refetch();
+    }
+})
+}
+
+
+
 
 
     return (
@@ -64,7 +90,7 @@ refetch()
 
             {
 myTasks?.length < 1 && <div className='mt-20 flex justify-center items-center'>
-        <h3 className='text-xl md:text-2xl font-medium text-center text-white'>You have not added any task yet</h3>
+        <h3 className='text-xl md:text-2xl font-medium text-center text-white'>You have no task to complete</h3>
     </div>
 }
 
@@ -73,6 +99,7 @@ myTasks?.length < 1 && <div className='mt-20 flex justify-center items-center'>
             myTasks?.map(task => <MyTaskCard key={task._id} task = {task}
                 refetch={refetch}
                 myTasks={myTasks}
+                handleMakeCompleted = {handleMakeCompleted}
                 handleDeletedTask = {handleDeletedTask} />)
         }
     </div>

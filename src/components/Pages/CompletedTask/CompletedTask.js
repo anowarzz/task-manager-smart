@@ -23,7 +23,7 @@ const CompletedTask = () => {
   });
 
 
-console.log(completedTasks);
+
 
 
   return (
@@ -37,10 +37,15 @@ console.log(completedTasks);
         Completed Tasks
       </h2>
 
+        {
+            completedTasks?.length < 1 && <p className="text-xl md:text-2xl font-semibold text-center text-white mt-12">You Have Not Completed Any Task Yet</p>
+        }
 
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 w-11/12 mx-auto gap-6 mt-10'>
+
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  w-11/12 mx-auto gap-6 mt-10'>
             {
-                completedTasks?.map(ctTask => <CompletedTaskCard key={ctTask._id} completeTask={ctTask} />)
+                completedTasks?.map(ctTask => <CompletedTaskCard key={ctTask._id} completeTask={ctTask}
+                    refetch={refetch} />)
             }
 
         </div>
