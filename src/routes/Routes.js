@@ -6,6 +6,7 @@ import Login from "../components/Pages/Login/Login";
 import MyTasks from "../components/Pages/MyTasks/MyTasks";
 import SignUp from "../components/Pages/SignUp/SignUp";
 import Main from "../layout/Main";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
 
@@ -24,11 +25,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/myTasks',
-                element: <MyTasks />
+                element: <PrivateRoute> <MyTasks /> </PrivateRoute>
             },
             {
                 path: '/completedTasks',
-                element: <CompletedTask />
+                element: <PrivateRoute> <CompletedTask /> </PrivateRoute>
             },
             {
                 path: '/login',

@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import React, { useContext, useState } from "react";
 import swal from "sweetalert";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { SyncLoader} from "react-spinners";

@@ -10,8 +10,9 @@ import swal from 'sweetalert';
 const MyTasks = () => {
 
 
-const {user, loading, setLoading} = useContext(AuthContext)
+const {user} = useContext(AuthContext)
 
+const [loading, setLoading] = useState(false)
 
 const [myTasks, setMyTasks] = useState([])
 
