@@ -1,16 +1,17 @@
 import { Button, Modal } from "flowbite-react";
 import React, { useState } from "react";
-import { useNavigation } from "react-router-dom";
 import swal from "sweetalert";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheckCircle,} from '@fortawesome/free-solid-svg-icons'
 
 
 const MyTaskCard = ({ task, handleDeletedTask, refetch}) => {
 
     const [showModal, setShowModal] = useState(false);
     const [editModeOn, setEditModeOn] = useState(false);
-    const from = '/myTasks'
+
     
-const navigate = useNavigation();
+
 
   // edit mode on
   const handleEditTask = () => {
@@ -76,22 +77,22 @@ const handleSubmitEdit = (event) => {
             : task?.description}
         </p>
 
-        <div className="flex gap-x-4 items-center justify-center  mt-3 absolute bottom-4 left-[20%] md:left-[15%]">
+        <div className="flex gap-x-4 flex-wrap items-center justify-center  mt-3 absolute bottom-4 left-[14%] md:left-[10%] lg:left-[5%]">
           <Button
             color="warning"
-            size="xs"
+            size="sm"
             onClick={() => setShowModal(!showModal)}
             id="details"
           >
             Details
           </Button>
-          <Button gradientMonochrome="success" size="xs">
-            Completed
+          <Button gradientMonochrome="success" size="sm">
+            Completed <FontAwesomeIcon icon={faCheckCircle} className="pl-1" />
           </Button>
           <Button
             onClick={() => handleDeletedTask(task)}
             color="failure"
-            size="xs"
+            size="sm"
           >
             Delete
           </Button>
