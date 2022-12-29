@@ -3,13 +3,13 @@ import React, { useState } from "react";
 import swal from "sweetalert";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle,} from '@fortawesome/free-solid-svg-icons'
-
+import { ScaleLoader} from "react-spinners";
 
 const MyTaskCard = ({ task, handleDeletedTask, refetch, handleMakeCompleted}) => {
 
     const [showModal, setShowModal] = useState(false);
     const [editModeOn, setEditModeOn] = useState(false);
-
+    const [loading, setLoading] = useState(false)
     
 
 
@@ -27,6 +27,7 @@ const MyTaskCard = ({ task, handleDeletedTask, refetch, handleMakeCompleted}) =>
 // Editing a task
 const handleSubmitEdit = (event) => {
     event.preventDefault();
+    setLoading(true)
     const form = event.target;
     const newTask = form.editTask.value;
 
@@ -50,11 +51,17 @@ const handleSubmitEdit = (event) => {
                 icon: "success",
                 button: "Go Back",
               });
+              setLoading(false)
               setEditModeOn(false)
               setShowModal(false)
            refetch();
         }
     })
+    .catch(er => {
+        console.log(er);
+        setLoading(false)        
+    })
+
   };
 
 
@@ -119,6 +126,12 @@ const handleSubmitEdit = (event) => {
           </Modal.Header>
           <Modal.Body>
             <div className="space-y-6 w-full">
+
+            {loading && (
+        <div className="z-90 absolute top-[50%] left-[50%] ">
+          <ScaleLoader color="blue" size={150} className="text-center" />
+        </div>
+      )}
               <img
                 src={task?.image}
                 className="h-48 w-4/5 object center"

@@ -1,17 +1,20 @@
 import {  faComment, faTrash, faTriangleExclamation, } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "flowbite-react";
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import swal from "sweetalert";
-
+import {ScaleLoader} from 'react-spinners'
 
 const CompletedTaskCard = ({ completeTask, refetch }) => {
 
 
+const [loading, setLoading] = useState(false)
+
+
 // Marking a task as completed
 const handleMakeNotCompleted = (id) => {
-
+    setLoading(true)
     fetch(`https://task-manager-server-lovat.vercel.app/tasks/notDoneTasks/${id}`, {
         method : "PUT"
     })
@@ -44,6 +47,7 @@ const handleDeletedTask = (id) => {
         console.log(data);
     if(data.deletedCount > 0){
     refetch()
+    setLoading(true)
         swal({
             title: "Yaa !",
             text: "Task Deleted Successfully",
@@ -57,6 +61,7 @@ const handleDeletedTask = (id) => {
 // adding comment to a task
 const handleAddComment = (event) => {
 event.preventDefault();
+setLoading(true)
 const form = event.target;
 const comment = form.comment.value;
 
@@ -87,9 +92,15 @@ console.log(comment);
                 progress: undefined,
                 theme: "colored",
               });
+              setLoading(false)
               form.reset();
               refetch();
         }
+    })
+    .catch(er => {
+        console.log(er);
+        setLoading(false)  
+        
     })
     }
 
@@ -97,12 +108,17 @@ console.log(comment);
 
   return (
   <div>
+    {loading && (
+        <div className="z-20 absolute top-[50%] left-[50%] ">
+          <ScaleLoader color="blue" size={150} className="text-center" />
+        </div>
+      )}
       <div className="max-w-lg shadow-2xl h-96 bg-red-500 border-gray-700  relative">
       <div>
         <img
           src={completeTask?.image}
           alt=""
-          className="h-52 w-full object-cover p-2"
+          className="h-52 w-full object-cover"
         />
       </div>
 

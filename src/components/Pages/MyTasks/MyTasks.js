@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import MyTaskCard from './MyTaskCard';
 import { SyncLoader} from "react-spinners";
-import TaskModal from './TaskModal';
 import swal from 'sweetalert';
 import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
