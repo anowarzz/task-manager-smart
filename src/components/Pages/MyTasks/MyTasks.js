@@ -26,37 +26,10 @@ const { isLoading, error, data:myTasks, refetch } = useQuery({
 
 
 
-
-
-
-
-
-
-
-
-
-// useEffect(  () => {
-//     setLoading(true)
-//     const url = `http://localhost:5000/myTasks?email=${user?.email}`
-
-//     fetch(url)
-//     .then(res => res.json())
-//     .then(data => {
-//         setMyTasks(data)
-//         setLoading(false)
-//     })
-//     .catch(err => console.log(err)
-//     )
-// },[user?.email, setLoading])
-
-
-
-
-
 // Deleting a task
 const handleDeletedTask = (task) => {
 
-const id = task._id;
+
 
 fetch(`http://localhost:5000/tasks/${task._id}`, {
     method: "DELETE"
@@ -69,7 +42,7 @@ refetch()
     swal({
         title: "Yaa !",
         text: "Task Deleted Successfully",
-        icon: "warn",
+        icon: "success",
         button: "Done",
       });
 }    

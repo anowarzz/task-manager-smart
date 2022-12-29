@@ -55,7 +55,8 @@ const AddTask = () => {
                 description,
                 image: imageLink,
                 taskCreatedTime,
-                userEmail: user?.email
+                userEmail: user?.email,
+                isComplete: false
               };
           
 
@@ -143,6 +144,7 @@ const AddTask = () => {
               accept="image/png, image/jpg, image/jpeg, image/webp"
               placeholder="Task Title Here"
               className="input w-4/5 lg:w-2/4 mx-auto mb-3 font-semibold py-2 text-center text-myPink bg-white rounded px-2"
+              required
             />
             <p className="mt-8 text-gray-50">Task Description</p>
             <textarea

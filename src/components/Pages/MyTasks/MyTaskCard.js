@@ -2,7 +2,7 @@ import { Button, Modal } from "flowbite-react";
 import React, { useState } from "react";
 import { useNavigation } from "react-router-dom";
 import swal from "sweetalert";
-import photo from "../../../assets/planning.png";
+
 
 const MyTaskCard = ({ task, handleDeletedTask, refetch}) => {
 
@@ -60,7 +60,7 @@ const handleSubmitEdit = (event) => {
     <div className="max-w-lg shadow-2xl h-96 bg-gray-300 border-gray-700 rounded-md relative">
       <div>
         <img
-          src={task?.image ? task?.image : photo}
+          src={task?.image}
           alt=""
           className="h-52 w-full object-cover object-center"
         />
