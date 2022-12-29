@@ -10,7 +10,7 @@ const MyTaskCard = ({ task, handleDeletedTask }) => {
 
 
   return (
-<div className="max-w-lg shadow-2xl h-96 bg-gray-100 border-gray-700 rounded-md relative">
+<div className="max-w-lg shadow-2xl h-96 bg-gray-300 border-gray-700 rounded-md relative">
 
     <div>
         <img src={task?.image ? task?.image : photo} alt="" className="h-52 w-full object-cover object-center" />
@@ -52,22 +52,22 @@ onClick={() => handleDeletedTask(task)} color="failure" size="xs">
           data-modal-toggle="details"
           tabIndex="2"
         >
-          <Modal.Header>
-            Terms of Service
+          <Modal.Header >
+         {task?.title}
           </Modal.Header>
           <Modal.Body>
             <div className="space-y-6 w-full">
-              <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
-              </p>
-              <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
+             <img src={task?.image} className="h-48 object-cover object center" alt="" />
+              <p className="text-base leading-relaxed text-black dark:text-gray200">
+               {
+                task?.description
+               }
               </p>
             </div>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={() => setShowModal(!showModal)}>
-              I accept
+              Edit Task
             </Button>
             <Button
               color="gray"

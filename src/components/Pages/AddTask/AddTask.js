@@ -105,8 +105,8 @@ const AddTask = () => {
       )}
       {user?.uid && (
         <p className="mt-6 text-center text-white text-lg">
-          {" "}
-          Welcome,{" "}
+        
+          Welcome
           <span className="text-blue-400 ml-2 text-lg">
             {user?.displayName}
           </span>

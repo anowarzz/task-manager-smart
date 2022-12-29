@@ -50,7 +50,7 @@ setMyTasks(remainingTask)
     swal({
         title: "Yaa !",
         text: "Task Deleted Successfully",
-        icon: "success",
+        icon: "warn",
         button: "Done",
       });
 }    
@@ -58,8 +58,10 @@ setMyTasks(remainingTask)
 }
 
 
+
+
     return (
-        <div className='mx-auto'>
+        <div className='mx-auto min-h-screen'> 
 
 {loading && (
         <div className="z-20 absolute top-[40%] left-[50%] ">
@@ -67,6 +69,13 @@ setMyTasks(remainingTask)
         </div>
       )} 
             <h2 className='text-2xl md:text-3xl lg:text-4xl text-myYellow text-center mt-10'>Your All Task List</h2>
+
+
+            {
+myTasks.length < 1 && <div className='mt-20 flex justify-center items-center'>
+        <h3 className='text-xl md:text-2xl font-medium text-center text-white'>You have not added any task yet</h3>
+    </div>
+}
 
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 w-11/12 mx-auto gap-6'>
         {
