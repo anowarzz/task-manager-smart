@@ -4,7 +4,7 @@ import { useNavigation } from "react-router-dom";
 import swal from "sweetalert";
 import photo from "../../../assets/planning.png";
 
-const MyTaskCard = ({ task, handleDeletedTask, myTasks, setMyTasks}) => {
+const MyTaskCard = ({ task, handleDeletedTask, refetch}) => {
 
     const [showModal, setShowModal] = useState(false);
     const [editModeOn, setEditModeOn] = useState(false);
@@ -51,10 +51,7 @@ const handleSubmitEdit = (event) => {
               });
               setEditModeOn(false)
               setShowModal(false)
-              const remaining = myTasks?.filter(tsk => tsk._id !== task._id )
-             
-              setMyTasks(remaining)
-              navigate(from, {replace :true})
+           refetch();
         }
     })
   };
@@ -74,8 +71,8 @@ const handleSubmitEdit = (event) => {
           {task?.title}
         </h3>
         <p className="text-gray-900 mt-2 ml-2">
-          {task?.description?.length > 40
-            ? task?.description.slice(0, 40) + " ..."
+          {task?.description?.length > 80
+            ? task?.description.slice(0, 80) + " ..."
             : task?.description}
         </p>
 
