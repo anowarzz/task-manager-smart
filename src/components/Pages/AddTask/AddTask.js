@@ -62,7 +62,7 @@ const AddTask = () => {
           
 
             // Posting tasks to database
-            fetch(`http://localhost:5000/tasks`, {
+            fetch(`https://task-manager-server-lovat.vercel.app/tasks`, {
               method: "POST",
               headers: {
                 "content-type": "application/json",
@@ -75,7 +75,7 @@ const AddTask = () => {
                   setLoading(false);
                   swal({
                     title: "Well Done !",
-                    text: "Task Added Successfully",
+                    text: "Task Added To My Tasks Successfully",
                     icon: "success",
                     button: "Go Back",
                   });

@@ -12,7 +12,7 @@ const CompletedTaskCard = ({ completeTask, refetch }) => {
 // Marking a task as completed
 const handleMakeNotCompleted = (id) => {
 
-    fetch(`http://localhost:5000/tasks/notDoneTasks/${id}`, {
+    fetch(`https://task-manager-server-lovat.vercel.app/tasks/notDoneTasks/${id}`, {
         method : "PUT"
     })
     .then(res => res.json())
@@ -36,7 +36,7 @@ const handleMakeNotCompleted = (id) => {
 // Deleting a task
 const handleDeletedTask = (id) => {
 
-    fetch(`http://localhost:5000/tasks/${id}`, {
+    fetch(`https://task-manager-server-lovat.vercel.app/tasks/${id}`, {
         method: "DELETE"
     })
     .then(res=> res.json())
@@ -67,7 +67,7 @@ console.log(comment);
     taskComment : comment
  }
 
-    fetch(`http://localhost:5000/taskComment/${completeTask?._id}`, {
+    fetch(`https://task-manager-server-lovat.vercel.app/taskComment/${completeTask?._id}`, {
         method : "PATCH",
         headers: {
             'content-type' : 'application/json'
@@ -110,7 +110,7 @@ console.log(comment);
         <h3 className="text-xl font-semibold text-gray-900 text-center mt-2">
           {completeTask?.title}
         </h3>
-        <p className="text-gray-900 mt-2 ml-2">{completeTask?.description}</p>
+        <p className="text-gray-50 mt-2 ml-2">{completeTask?.description}</p>
 
         <div className="flex gap-x-4 items-center justify-center  mt-3 absolute bottom-4 left-[8%] lg:left-[7%]">
         <Button gradientMonochrome="success"

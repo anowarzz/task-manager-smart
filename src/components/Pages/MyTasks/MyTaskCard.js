@@ -34,7 +34,7 @@ const handleSubmitEdit = (event) => {
         taskDescription : newTask
     }
 
-    fetch(`http://localhost:5000/tasks/${task._id}`, {
+    fetch(`https://task-manager-server-lovat.vercel.app/tasks/${task._id}`, {
         method: 'PUT',
         headers: {
             'content-type' : 'application/json'
@@ -112,7 +112,11 @@ const handleSubmitEdit = (event) => {
           data-modal-toggle="details"
           tabIndex="2"
         >
-          <Modal.Header>{task?.title}</Modal.Header>
+          <Modal.Header>
+         
+            {task?.title}
+
+          </Modal.Header>
           <Modal.Body>
             <div className="space-y-6 w-full">
               <img
@@ -136,7 +140,7 @@ const handleSubmitEdit = (event) => {
                     size="sm"
                     color="success"
                   >
-                    Submit Edit
+                    Submit Update
                   </Button>
                 </form>
               ) : (
@@ -148,7 +152,7 @@ const handleSubmitEdit = (event) => {
           </Modal.Body>
           <Modal.Footer>
             <Button size="sm" onClick={handleEditTask}>
-              Edit Task
+              Update Task
             </Button>
 
             <Button color="dark" size="sm" onClick={closeModal}>

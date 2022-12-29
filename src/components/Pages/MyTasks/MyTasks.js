@@ -19,7 +19,7 @@ const {user} = useContext(AuthContext)
 const { isLoading, error, data:myTasks=[], refetch } = useQuery({
     queryKey: [user?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/myTasks?email=${user?.email}`)
+      fetch(`https://task-manager-server-lovat.vercel.app/myTasks?email=${user?.email}`)
       .then(res =>
         res.json()
       )
@@ -31,7 +31,7 @@ const { isLoading, error, data:myTasks=[], refetch } = useQuery({
 const handleDeletedTask = (id) => {
 
 
-fetch(`http://localhost:5000/tasks/${id}`, {
+fetch(`https://task-manager-server-lovat.vercel.app/tasks/${id}`, {
     method: "DELETE"
 })
 .then(res=> res.json())
@@ -52,7 +52,7 @@ refetch()
 // Marking a task as completed
 const handleMakeCompleted = (id) => {
 
-fetch(`http://localhost:5000/tasks/doneTasks/${id}`, {
+fetch(`https://task-manager-server-lovat.vercel.app/tasks/doneTasks/${id}`, {
     method : "PUT"
 })
 .then(res => res.json())
@@ -84,7 +84,7 @@ if(isLoading){
     return (
         <div className='mx-auto min-h-screen'> 
 
-            <h2 className='text-2xl md:text-3xl lg:text-4xl text-myYellow text-center mt-10'>Your All Task List</h2>
+            <h2 className='text-2xl md:text-3xl lg:text-4xl text-myYellow text-center mt-10'>Your All Uncompleted Task List</h2>
 
 
             {

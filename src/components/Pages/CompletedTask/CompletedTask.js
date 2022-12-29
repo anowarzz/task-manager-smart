@@ -16,7 +16,7 @@ const CompletedTask = () => {
   } = useQuery({
     queryKey: [user?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/completeTasks?email=${user?.email}`)
+      fetch(`https://task-manager-server-lovat.vercel.app/completeTasks?email=${user?.email}`)
       .then((res) =>
         res.json()
       ),
