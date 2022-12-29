@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import swal from "sweetalert";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { SyncLoader} from "react-spinners";
-import { format, getHours } from "date-fns";
+import { format } from "date-fns";
 
 const AddTask = () => {
   const { user } = useContext(AuthContext);
@@ -31,8 +31,6 @@ const AddTask = () => {
   const handleAddTask = (event) => {
     event.preventDefault();
     setLoading(true);
-
-
     const form = event.target;
     const title = form.title.value;
     const description = form.description.value;
@@ -66,13 +64,13 @@ const AddTask = () => {
               };
           
 
-            // Posting tasks to database
-            fetch(`https://task-manager-server-lovat.vercel.app/tasks`, {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(task),
+ // Posting tasks to database
+   fetch(`https://task-manager-server-lovat.vercel.app/tasks`, {
+  method: "POST",
+    headers: {
+       "content-type": "application/json",
+      },
+     body: JSON.stringify(task),
             })
               .then((res) => res.json())
               .then((data) => {
@@ -99,9 +97,6 @@ const AddTask = () => {
 
 
 
-  
-
-
 
   return (
     <div className="">
@@ -126,7 +121,6 @@ const AddTask = () => {
 
       <div className="mt-12">
         <form onSubmit={handleAddTask} 
-    
         className="w-full" >
           <div className="flex flex-col justify-center items-center mx-auto">
             <p className="mb-4 text-gray-50">Task Title</p>
@@ -139,9 +133,9 @@ const AddTask = () => {
               required
             />
 
-            {/* <p className='mb-4 text-gray-50'>Add Image</p> */}
+         
             <label htmlFor="image" className="text-white p-3">
-              Upload Image
+              Add Image
             </label>
             <input
               onChange={handleImage}
@@ -154,7 +148,6 @@ const AddTask = () => {
             />
             <p className="mt-8 text-gray-50">Task Description</p>
             <textarea
-          
               type="text"
               name="description"
               className="textarea  outline-fuchsia-600 w-4/5 lg:w-2/4 mx-auto mt-4 px-4  py-8 font-semibold text-center"
