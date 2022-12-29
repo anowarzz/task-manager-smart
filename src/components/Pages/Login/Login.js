@@ -54,6 +54,7 @@ const Login = () => {
       .catch((error) => {
         console.error(error);
         setError(error.message);
+        setLoading(false);
       });
   };
 
@@ -82,6 +83,7 @@ const Login = () => {
       .catch((err) => {
         console.error(err);
         setError(err.message);
+        setLoading(false);
       });
   };
   

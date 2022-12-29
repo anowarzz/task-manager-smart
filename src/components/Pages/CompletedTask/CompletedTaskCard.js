@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "flowbite-react";
 import React from "react";
 import { toast } from "react-toastify";
+import swal from "sweetalert";
 
 
 const CompletedTaskCard = ({ completeTask, refetch }) => {
@@ -32,7 +33,27 @@ const handleMakeNotCompleted = (id) => {
     })
     }
 
+// Deleting a task
+const handleDeletedTask = (id) => {
 
+
+    fetch(`http://localhost:5000/tasks/${id}`, {
+        method: "DELETE"
+    })
+    .then(res=> res.json())
+    .then(data => {
+        console.log(data);
+    if(data.deletedCount > 0){
+    refetch()
+        swal({
+            title: "Yaa !",
+            text: "Task Deleted Successfully",
+            icon: "success",
+            button: "Done",
+          });
+    }    
+    })
+    }
 
   return (
     <div className="max-w-lg shadow-2xl h-96 bg-red-500 border-gray-700 rounded-md relative">
@@ -51,7 +72,9 @@ const handleMakeNotCompleted = (id) => {
         <p className="text-gray-900 mt-2 ml-2">{completeTask?.description}</p>
 
         <div className="flex gap-x-4 items-center justify-center  mt-3 absolute bottom-4 left-[8%] lg:left-[7%]">
-        <Button gradientMonochrome="success">
+        <Button gradientMonochrome="success"
+        onClick={() => handleDeletedTask(completeTask?._id)}
+        >
             Delete Task
             <FontAwesomeIcon icon={faTrash} className="pl-2" />
     </Button>

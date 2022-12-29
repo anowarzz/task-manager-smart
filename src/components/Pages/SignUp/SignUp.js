@@ -206,7 +206,7 @@ const handleCreateUser = (event) => {
   
             <div className="mt-4">
               <button className="w-full px-6 py-2.5 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-900 rounded-lg hover:bg-purple-800 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
-                Sign In
+                Sign Up
               </button>
             </div>
           </form>

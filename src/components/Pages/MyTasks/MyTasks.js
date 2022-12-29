@@ -16,7 +16,7 @@ const {user} = useContext(AuthContext)
 
 
 
-const { isLoading, error, data:myTasks, refetch } = useQuery({
+const { isLoading, error, data:myTasks=[], refetch } = useQuery({
     queryKey: [user?.email],
     queryFn: () =>
       fetch(`http://localhost:5000/myTasks?email=${user?.email}`)
@@ -28,10 +28,10 @@ const { isLoading, error, data:myTasks, refetch } = useQuery({
 
 
 // Deleting a task
-const handleDeletedTask = (task) => {
+const handleDeletedTask = (id) => {
 
 
-fetch(`http://localhost:5000/tasks/${task._id}`, {
+fetch(`http://localhost:5000/tasks/${id}`, {
     method: "DELETE"
 })
 .then(res=> res.json())
@@ -73,24 +73,23 @@ fetch(`http://localhost:5000/tasks/doneTasks/${id}`, {
 })
 }
 
-
+if(isLoading){
+    <div className="z-20 absolute top-[40%] left-[50%] ">
+          <SyncLoader color="red" size={20} className="text-center" />
+        </div> 
+}
 
 
 
     return (
         <div className='mx-auto min-h-screen'> 
 
-{isLoading && (
-        <div className="z-20 absolute top-[40%] left-[50%] ">
-          <SyncLoader color="red" size={20} className="text-center" />
-        </div>
-      )} 
             <h2 className='text-2xl md:text-3xl lg:text-4xl text-myYellow text-center mt-10'>Your All Task List</h2>
 
 
             {
-myTasks?.length < 1 && <div className='mt-20 flex justify-center items-center'>
-        <h3 className='text-xl md:text-2xl font-medium text-center text-white'>You have no task to complete</h3>
+myTasks?.length < 1 && <div className='mt-12 flex justify-center items-center'>
+        <h3 className='text-xl md:text-2xl font-medium text-center text-white'>You have no  task to complete now</h3>
     </div>
 }
 

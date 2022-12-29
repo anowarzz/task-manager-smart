@@ -11,7 +11,7 @@ const CompletedTask = () => {
   const {
     isLoading,
     error,
-    data:completedTasks,
+    data:completedTasks =[],
     refetch,
   } = useQuery({
     queryKey: [user?.email],
@@ -24,21 +24,21 @@ const CompletedTask = () => {
 
 
 
-
+  if(isLoading){
+    <div className="z-20 absolute top-[40%] left-[50%] ">
+          <SyncLoader color="red" size={20} className="text-center" />
+        </div> 
+}
 
   return (
     <div className="min-h-screen">
-      {isLoading && (
-        <div className="z-20 absolute top-[40%] left-[50%] ">
-          <SyncLoader color="red" size={20} className="text-center" />
-        </div>
-      )}
-      <h2 className="text-myYellow text-2xl md:text-3xl lg:text-4xl text-center mt-8">
+
+      <h2 className="text-myYellow text-2xl md:text-3xl lg:text-4xl text-center mt-10">
         Completed Tasks
       </h2>
 
         {
-            completedTasks?.length < 1 && <p className="text-xl md:text-2xl font-semibold text-center text-white mt-12">You Have Not Completed Any Task Yet</p>
+            completedTasks?.length < 1 && <p className="text-xl md:text-2xl font-medium text-center text-white mt-12">You Have Not Completed Any Task Yet</p>
         }
 
 
