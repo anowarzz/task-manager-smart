@@ -1,4 +1,4 @@
-import {  faTrash, faTriangleExclamation, } from "@fortawesome/free-solid-svg-icons";
+import {  faComment, faTrash, faTriangleExclamation, } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "flowbite-react";
 import React from "react";
@@ -56,7 +56,8 @@ const handleDeletedTask = (id) => {
     }
 
   return (
-    <div className="max-w-lg shadow-2xl h-96 bg-red-500 border-gray-700 rounded-md relative">
+  <div>
+      <div className="max-w-lg shadow-2xl h-96 bg-red-500 border-gray-700  relative">
       <div>
         <img
           src={completeTask?.image}
@@ -88,6 +89,18 @@ const handleDeletedTask = (id) => {
         </div>
       </div>
     </div>
+<form>
+<div className="bg-purple-500 flex justify-center items-center max-w-lg">
+<textarea name="comment" placeholder="Type Your Comment" className="py-2 w-5/6 ">
+
+</textarea>
+<Button gradientDuoTone="purpleToPink" className="py-2 rounded-none">
+  Add  Comment <FontAwesomeIcon icon={faComment} className="pl-2" />
+            </Button>
+</div>
+</form>
+  </div>
+
   );
 };
 
