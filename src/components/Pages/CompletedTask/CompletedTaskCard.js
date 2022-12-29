@@ -36,7 +36,6 @@ const handleMakeNotCompleted = (id) => {
 // Deleting a task
 const handleDeletedTask = (id) => {
 
-
     fetch(`http://localhost:5000/tasks/${id}`, {
         method: "DELETE"
     })
@@ -54,6 +53,47 @@ const handleDeletedTask = (id) => {
     }    
     })
     }
+
+// adding comment to a task
+const handleAddComment = (event) => {
+event.preventDefault();
+const form = event.target;
+const comment = form.comment.value;
+
+console.log(comment);
+
+
+ const taskComment = {
+    taskComment : comment
+ }
+
+    fetch(`http://localhost:5000/taskComment/${completeTask?._id}`, {
+        method : "PATCH",
+        headers: {
+            'content-type' : 'application/json'
+        },
+        body: JSON.stringify(taskComment)
+    })
+    .then(res => res.json())
+    .then( data => {
+        if(data.modifiedCount > 0){
+            toast.success("Comment added to the task", {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+              });
+              form.reset();
+              refetch();
+        }
+    })
+    }
+
+
 
   return (
   <div>
@@ -89,16 +129,24 @@ const handleDeletedTask = (id) => {
         </div>
       </div>
     </div>
-<form>
+
+    {/* Add comment section  */}
+<form onSubmit={handleAddComment}>
 <div className="bg-purple-500 flex justify-center items-center max-w-lg">
 <textarea name="comment" placeholder="Type Your Comment" className="py-2 w-5/6 ">
 
 </textarea>
-<Button gradientDuoTone="purpleToPink" className="py-2 rounded-none">
+<Button gradientDuoTone="purpleToPink" className="py-2 rounded-none" type="submit"
+>
   Add  Comment <FontAwesomeIcon icon={faComment} className="pl-2" />
             </Button>
 </div>
 </form>
+
+<div className="bg-gray-200 max-w-lg py-4 px-2">
+<p className="pl-1 text-gray-900">
+<span className="font-semibold">Comment :</span> {completeTask?.comment}</p>
+</div>
   </div>
 
   );

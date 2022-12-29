@@ -56,7 +56,8 @@ const AddTask = () => {
                 image: imageLink,
                 taskCreatedTime,
                 userEmail: user?.email,
-                isComplete: false
+                isComplete: false,
+                comment: ""
               };
           
 
