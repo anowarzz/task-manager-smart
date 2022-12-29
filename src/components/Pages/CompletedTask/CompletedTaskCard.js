@@ -126,6 +126,8 @@ console.log(comment);
         <h3 className="text-xl font-semibold text-gray-900 text-center mt-2">
           {completeTask?.title}
         </h3>
+        <p className="text-gray-50 mt-2 ml-2 text-xs">{completeTask?.taskCreatedTime}</p>
+
         <p className="text-gray-50 mt-2 ml-2">{completeTask?.description}</p>
 
         <div className="flex gap-x-4 items-center justify-center  mt-3 absolute bottom-4 left-[8%] lg:left-[7%]">

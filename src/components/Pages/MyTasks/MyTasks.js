@@ -14,7 +14,6 @@ const MyTasks = () => {
 const {user} = useContext(AuthContext)
 
 
-
 const { isLoading, error, data:myTasks=[], refetch } = useQuery({
     queryKey: [user?.email],
     queryFn: () =>

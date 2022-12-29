@@ -82,6 +82,8 @@ const handleSubmitEdit = (event) => {
         <h3 className="text-xl font-semibold text-gray-900 text-center mt-2">
           {task?.title}
         </h3>
+
+        <p className="text-gray-900 mt-2 ml-2 text-xs">{task?.taskCreatedTime}</p>
         <p className="text-gray-900 mt-2 ml-2">
           {task?.description?.length > 80
             ? task?.description.slice(0, 80) + " ..."

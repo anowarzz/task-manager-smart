@@ -13,6 +13,7 @@ const AddTask = () => {
 //   const [imageLink, setImageLink] = useState("");
   const [loading, setLoading] = useState(false);
 
+
   // getting image data from input field
   const handleImage = (e) => {
     const image = e.target.files[0];
@@ -21,6 +22,10 @@ const AddTask = () => {
 
   const taskCreatedTime = format(new Date(), "PP");
 
+//  const timeMilliseconds = new Date()
+//  const timeHour = new Date(timeMilliseconds).toLocaleString()
+//  console.log(timeHour);
+ 
 
   // function for adding  task to database
   const handleAddTask = (event) => {
