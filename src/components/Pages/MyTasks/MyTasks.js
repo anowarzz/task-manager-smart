@@ -13,6 +13,7 @@ const MyTasks = () => {
 
 const {user} = useContext(AuthContext)
 
+const [loading, setLoading] = useState(false)
 
 const { isLoading, error, data:myTasks=[], refetch } = useQuery({
     queryKey: [user?.email],
@@ -23,12 +24,10 @@ const { isLoading, error, data:myTasks=[], refetch } = useQuery({
       )
   })
 
-
-
 // Deleting a task
 const handleDeletedTask = (id) => {
 
-
+setLoading(true)
 fetch(`https://task-manager-server-lovat.vercel.app/tasks/${id}`, {
     method: "DELETE"
 })
@@ -37,6 +36,7 @@ fetch(`https://task-manager-server-lovat.vercel.app/tasks/${id}`, {
     console.log(data);
 if(data.deletedCount > 0){
 refetch()
+setLoading(false)
     swal({
         title: "Yaa !",
         text: "Task Deleted Successfully",
@@ -71,7 +71,7 @@ fetch(`https://task-manager-server-lovat.vercel.app/tasks/doneTasks/${id}`, {
 })
 }
 
-if(isLoading){
+if(isLoading || loading){
     <div className="z-20 absolute top-[40%] left-[50%] ">
           <SyncLoader color="red" size={20} className="text-center" />
         </div> 

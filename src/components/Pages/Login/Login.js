@@ -28,7 +28,7 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     console.log(email);
-    console.log("hllo");
+
     
     const password = form.password.value;
 
@@ -96,6 +96,17 @@ const Login = () => {
           <ScaleLoader color="blue" size={100} className="text-center" />
         </div>
       )}
+
+
+
+<div className="text-white mb-4">
+  <h3 className="text-blue-500 md:text-lg">Easy Login With</h3>
+  <p className="text-sm md:text-base">Email: test@user.com</p>
+  <p className="text-sm md:text- base">Password: 123456 </p>
+</div>
+
+
+
       <div className="w-full max-w-md p-6  mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
         <h1 className="text-3xl font-semibold text-center text-gray-700 dark:text-white">
           Login

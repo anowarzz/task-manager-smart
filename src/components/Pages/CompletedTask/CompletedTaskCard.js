@@ -38,7 +38,7 @@ const handleMakeNotCompleted = (id) => {
 
 // Deleting a task
 const handleDeletedTask = (id) => {
-
+    setLoading(true)
     fetch(`https://task-manager-server-lovat.vercel.app/tasks/${id}`, {
         method: "DELETE"
     })
@@ -47,7 +47,7 @@ const handleDeletedTask = (id) => {
         console.log(data);
     if(data.deletedCount > 0){
     refetch()
-    setLoading(true)
+    setLoading(false)
         swal({
             title: "Yaa !",
             text: "Task Deleted Successfully",
@@ -55,6 +55,11 @@ const handleDeletedTask = (id) => {
             button: "Done",
           });
     }    
+    })
+    .catch(er => {
+        console.log(er);
+        setLoading(false)
+        
     })
     }
 
